@@ -2,13 +2,14 @@ package starter.Page;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.pages.PageObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
 
 
 public class LoginPage extends PageObject {
-
+//============================ Locator ===============================================
     private By LandingPage (){
         return By.xpath("//*[@id=\"root\"]/div/div[1]");
     }
@@ -24,10 +25,12 @@ public class LoginPage extends PageObject {
     private By ValidasiLogin(){
         return  By.xpath("//*[@id=\"shopping_cart_container\"]/a");
     }
-    private By ValidasiLoginInValid(){
-        return  By.xpath("//*[@id=\"login_button_container\"]/div/form/div[3]/h3");
+    private By ErrorMessage(){
+        return  By.xpath("//h3[@data-test='error']");
     }
 
+
+    //=========================================== Function =================================
     @Step
     public void OnlandingPage(){
     open();
@@ -45,12 +48,11 @@ public class LoginPage extends PageObject {
         $(ButtonLogin()).click();
     }
     public void ValidasiLoginValid(){
-        $(ValidasiLogin()).isDisplayed();
-        $(ValidasiLogin()).withTimeoutOf(Duration.ofSeconds(10));
+        $(ValidasiLogin()).shouldBeVisible();
     }
-    public void ValidasiLoginINvalid(){
-        $(ValidasiLoginInValid()).isDisplayed();
-        $(ValidasiLoginInValid()).withTimeoutOf(Duration.ofSeconds(15));
+    public void ValidasiLoginINvalid() {
+        $(ErrorMessage()).shouldBeVisible(); // ini biar error message dipastikan tampil
+    }
     }
 
-}
+

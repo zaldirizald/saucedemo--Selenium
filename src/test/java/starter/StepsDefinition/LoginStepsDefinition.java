@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import org.junit.Assert;
 import starter.Page.LoginPage;
 
 public class LoginStepsDefinition {
@@ -60,6 +61,8 @@ public class LoginStepsDefinition {
     @Then("Pengguna tidak berhasil login")
     public void penggunaTidakBerhasilLogin() {
         loginPage.ValidasiLoginINvalid();
-        System.out.println("Tidak berhasil Masuk");
+        String expectedMessage = "Epic sadface: Username and password do not match any user in this service";
+        Assert.assertEquals("Epic sadface: Username and password do not match any user in this service", expectedMessage);
     }
-}
+    }
+
